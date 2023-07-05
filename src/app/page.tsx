@@ -2,19 +2,18 @@ import BlogItem from "@/components/BlogItem";
 import Images from "@/components/Images";
 import Section from "@/components/Section";
 import SectionHeader from "@/components/SectionHeader";
-import Image from "next/image";
-import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="mb-40">
-      <div className="banner h-[480px] bg-slate-500 relative">
-        <Image
+      <div className="banner h-[500px] bg-slate-500 relative">
+        <Images
+          w={"100%"}
+          h={"100%"}
+          alt={""}
           src={
             "https://theme.hstatic.net/200000695155/1001036967/14/slider_1.jpg?v=495"
           }
-          layout="fill"
-          alt="sss"
         />
       </div>
 
