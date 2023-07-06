@@ -4,15 +4,40 @@ import ProductItem from "@/components/ProductItem";
 const Details = () => {
   return (
     <>
-      <div className="h-[500px] w-1/2">
-        <Images
-          w={"100%"}
-          h={"100%"}
-          alt={""}
-          src={
-            "https://theme.hstatic.net/200000695155/1001036967/14/slider_1.jpg?v=495"
-          }
-        />
+      <div className="flex gap-8">
+        <div className="h-[500px] w-1/2">
+          <Images
+            w={"100%"}
+            h={"100%"}
+            alt={""}
+            src={
+              "https://theme.hstatic.net/200000695155/1001036967/14/slider_1.jpg?v=495"
+            }
+          />
+        </div>
+
+        <div>
+          <span className="text-sm text-grayText-300">Danh mục 1</span>
+          <h3 className="text-3xl text-grayText mt-2">Áo bra tập gym yoga</h3>
+          <span className="text-lg block mt-5">Thỏa thuận</span>
+          <span className="block mt-4">
+            Tình trạng: <span className="text-blue-600">Còn hàng</span>
+          </span>
+          <div className="mt-3">
+            <h6>Mô tả ngắn</h6>
+            <p>shshshashaywywywywywgwwggggggggggggggggggjjsssssss</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-14">
+        <div className="border border-b-0 w-fit">
+          <span className="block px-5 py-2 text-base font-medium text-white bg-gray-800">Mô tả chi tiết</span>
+        </div>
+
+        <div className="border p-4">
+          sshahshsyaywyywwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwdggggggggggggggggggggggggg
+        </div>
       </div>
 
       <div className="mt-14">
