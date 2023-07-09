@@ -1,4 +1,5 @@
 "use client";
+import StaticImages from "@/assets/img";
 import Image, { ImageProps } from "next/legacy/image";
 import { FC, SyntheticEvent, useState } from "react";
 interface removeSrcImage {
@@ -23,7 +24,7 @@ const Images: FC<ImagesCustomProps> = ({
   w = 50,
   h = 50,
   src = "",
-  defaultSrc = "",
+  defaultSrc = StaticImages.defaultImage,
   isRounded = false,
   alt = "",
   className = "",
@@ -31,6 +32,7 @@ const Images: FC<ImagesCustomProps> = ({
   innerPropsImages = {},
   zIndex = 0,
 }) => {
+  const [srcImage, setSrcImage] = useState(src || defaultSrc);
   const [isPeding, setIsPending] = useState(true);
   const propsImages = (innerPropsImages && { ...innerPropsImages }) ?? {};
 
@@ -46,13 +48,13 @@ const Images: FC<ImagesCustomProps> = ({
         objectFit="cover"
         {...propsImages}
         className={`w-full h-full object-cover relative z-[1] ${classNameImg}`}
-        src={src || defaultSrc}
+        src={srcImage}
         alt={alt}
         onLoadingComplete={() => {
           setIsPending(false);
         }}
-        onError={(e: SyntheticEvent<HTMLImageElement, Event>) => {
-          e.currentTarget && e?.currentTarget?.setAttribute("src", defaultSrc);
+        onError={() => {
+          setSrcImage(defaultSrc);
         }}
       />
 

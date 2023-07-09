@@ -1,5 +1,4 @@
 import { FC, HTMLAttributes } from "react";
-import Image from "next/image";
 import SectionHeader, { SectionHeaderProps } from "../SectionHeader";
 import Images from "../Images";
 
@@ -7,6 +6,7 @@ interface SectionProps extends SectionHeaderProps {
   classSection?: HTMLAttributes<HTMLDivElement>["className"];
   descSection?: string;
   isReverse?: boolean;
+  thumb?: string
 }
 
 const Section: FC<SectionProps> = ({
@@ -15,6 +15,7 @@ const Section: FC<SectionProps> = ({
   classSection,
   descSection,
   isReverse = false,
+  thumb
 }) => {
   return (
     <div className={classSection}>
@@ -30,9 +31,9 @@ const Section: FC<SectionProps> = ({
         <div className="w-1/2">
           <Images
             w={"100%"}
-            h={"640px"}
+            h={"500px"}
             alt={title ?? ""}
-            src={"https://lauwang.vn/wp-content/uploads/2023/03/web.jpg"}
+            src={thumb}
           />
         </div>
       </div>

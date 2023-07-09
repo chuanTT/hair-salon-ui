@@ -1,81 +1,84 @@
+"use client";
+import Banner from "@/components/Banner";
 import BlogItem from "@/components/BlogItem";
-import Images from "@/components/Images";
 import ProductItem from "@/components/ProductItem";
 import Section from "@/components/Section";
 import SectionHeader from "@/components/SectionHeader";
+import { configBlog, configProduct, configSection } from "@/config/configApi";
+import useFetchingApi from "@/hook/useFetchingApi";
+import { apiDataBlog, apiDataProduct, apiDataSection } from "@/types";
 
 export default function Home() {
+  
+  const { data: ProductData } = useFetchingApi(configProduct);
+  const { data: BlogData } = useFetchingApi(configBlog);
+  const { data: SectionData } = useFetchingApi(configSection);
+
   return (
     <div className="mb-40">
-      <div className="banner h-[500px] bg-slate-500 relative">
-        <Images
-          w={"100%"}
-          h={"100%"}
-          alt={""}
-          src={
-            "https://theme.hstatic.net/200000695155/1001036967/14/slider_1.jpg?v=495"
-          }
-        />
-      </div>
+      <Banner />
 
       <div className="mt-16">
         <SectionHeader title="Sản phẩm" desc="Cập nhật mới nhất" />
         <div className="mt-16 grid grid-cols-3 gap-5">
-          <ProductItem
-            desc="Hè này, Lẩu Wang update menu khai vị mới: Buffet gà Hàn Quốc. Team mê gà thì chắc chắn không thể bỏ qua Buffet gà 9 món gọi thả ga này của Lẩu Wang được đâu! Gà vừa tươi, vừa mềm mọng juicy thì sao mà chịu nổi đây. "
-            title="CHÀO SÂN HÈ NÀY – LẨU WANG UPDATE KHAI VỊ MỚI: KHAY GÀ 1 MÉT "
-            src="https://lauwang.vn/wp-content/uploads/2023/06/1-1-1-1024x640.jpg"
-          />
-          <ProductItem
-            desc="Hè này, Lẩu Wang update menu khai vị mới: Buffet gà Hàn Quốc. Team mê gà thì chắc chắn không thể bỏ qua Buffet gà 9 món gọi thả ga này của Lẩu Wang được đâu! Gà vừa tươi, vừa mềm mọng juicy thì sao mà chịu nổi đây. "
-            title="CHÀO SÂN HÈ NÀY – LẨU WANG UPDATE KHAI VỊ MỚI: KHAY GÀ 1 MÉT "
-            src="https://lauwang.vn/wp-content/uploads/2023/06/1-1-1-1024x640.jpg"
-          />
-
-          <ProductItem
-            desc="Hè này, Lẩu Wang update menu khai vị mới: Buffet gà Hàn Quốc. Team mê gà thì chắc chắn không thể bỏ qua Buffet gà 9 món gọi thả ga này của Lẩu Wang được đâu! Gà vừa tươi, vừa mềm mọng juicy thì sao mà chịu nổi đây. "
-            title="CHÀO SÂN HÈ NÀY – LẨU WANG UPDATE KHAI VỊ MỚI: KHAY GÀ 1 MÉT "
-            src="https://lauwang.vn/wp-content/uploads/2023/06/1-1-1-1024x640.jpg"
-          />
+          {ProductData?.data?.data &&
+            ProductData?.data?.data?.map(
+              (product: apiDataProduct, index: number) => {
+                return (
+                  <ProductItem
+                    key={index}
+                    desc={product?.short_content}
+                    title={product?.name}
+                    src={product?.list_images?.[0]?.thumb}
+                    date={product?.created_at}
+                    name_cate={product?.category?.name}
+                    link={product?.alias}
+                    isNegotiate={product?.isNegotiate ?? 0}
+                    price={product?.price ?? 0}
+                  />
+                );
+              }
+            )}
         </div>
       </div>
 
-      <Section
-        classSection="mt-16"
-        title="Câu chuyện thương hiệu"
-        desc="Tinh hoa ẩm thực Việt"
-        descSection="Lẩu Wang – Vua Buffet Lẩu là hệ thống nhà hàng buffet lẩu tại Hà Nội, rất được khách hàng tin tưởng và đánh giá cao về chất lượng. Với giá buffet chỉ từ 139.000 đồng, khách hàng sẽ được thưởng thức tới gần 50 món ăn đa dạng từ ba chỉ bò Mỹ, hải sản tổng hợp, khai vị kích thích vị giác với gà chiên cay ngọt Hàn Quốc, đảo sườn cay Thái Lan, bò xào lúc lắc,… cùng vô vàn những món ăn, thức uống hấp dẫn khác."
-      />
+      {SectionData?.data?.data &&
+        SectionData?.data?.data?.map(
+          (section: apiDataSection, index: number) => {
+            return (
+              <Section
+                key={index}
+                isReverse={!(index % 2 === 0)}
+                classSection="mt-16"
+                title={section?.title}
+                desc={section?.sub_title}
+                descSection={section?.content}
+                thumb={section?.thumb}
+              />
+            );
+          }
+        )}
 
-      <Section
-        classSection="mt-16"
-        title="Câu chuyện thương hiệu"
-        desc="Tinh hoa ẩm thực Việt"
-        isReverse
-        descSection="Ẩm thực chính là tấm gương phản chiếu văn hóa của mỗi quốc gia. Hiểu được điều này, Lẩu Wang – Vua Buffet Lẩu luôn kế thừa và giữ gìn cốt lõi vị lẩu bản địa đồng thời điều chỉnh hương vị để phù hợp với người Việt. Lẩu Wang đã tạo ra 5 hương vị lẩu vô cùng độc đáo, trọn vị."
-      />
+      {BlogData?.data?.data && (
+        <div className="mt-16">
+          <SectionHeader title="Tin tức" desc="Thông tin cập nhật" />
 
-      <div className="mt-16">
-        <SectionHeader title="Tin tức" desc="Thông tin cập nhật" />
-
-        <div className="mt-16 flex gap-5 [&>*]:w-1/3">
-          <BlogItem
-            desc="Hè này, Lẩu Wang update menu khai vị mới: Buffet gà Hàn Quốc. Team mê gà thì chắc chắn không thể bỏ qua Buffet gà 9 món gọi thả ga này của Lẩu Wang được đâu! Gà vừa tươi, vừa mềm mọng juicy thì sao mà chịu nổi đây. "
-            title="CHÀO SÂN HÈ NÀY – LẨU WANG UPDATE KHAI VỊ MỚI: KHAY GÀ 1 MÉT "
-            src="https://lauwang.vn/wp-content/uploads/2023/06/1-1-1-1024x640.jpg"
-          />
-          <BlogItem
-            desc="Hè này, Lẩu Wang update menu khai vị mới: Buffet gà Hàn Quốc. Team mê gà thì chắc chắn không thể bỏ qua Buffet gà 9 món gọi thả ga này của Lẩu Wang được đâu! Gà vừa tươi, vừa mềm mọng juicy thì sao mà chịu nổi đây. "
-            title="Tháng 5 rực rỡ Lẩu Wang ưu đãi hết cỡ – Tha hồ liên hoan!"
-            src="https://lauwang.vn/wp-content/uploads/2023/05/4551c891c0011f5f4610.jpg"
-          />
-          <BlogItem
-            desc="Hè này, Lẩu Wang update menu khai vị mới: Buffet gà Hàn Quốc. Team mê gà thì chắc chắn không thể bỏ qua Buffet gà 9 món gọi thả ga này của Lẩu Wang được đâu! Gà vừa tươi, vừa mềm mọng juicy thì sao mà chịu nổi đây. "
-            title="CHÀO SÂN HÈ NÀY – LẨU WANG UPDATE KHAI VỊ MỚI: KHAY GÀ 1 MÉT "
-            src="https://lauwang.vn/wp-content/uploads/2023/06/1-1-1-1024x640.jpg"
-          />
+          <div className="mt-16 flex gap-5 [&>*]:w-1/3">
+            {BlogData?.data?.data?.map((blog: apiDataBlog, index: number) => {
+              return (
+                <BlogItem
+                  key={index}
+                  desc={blog?.short_content}
+                  title={blog?.title}
+                  src={blog?.thumb}
+                  date={blog?.created_at}
+                  link={blog?.alias}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
