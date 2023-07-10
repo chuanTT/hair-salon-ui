@@ -52,7 +52,7 @@ const Products = () => {
 
       <div>
         {isFetched && pagination && (
-          <div className="mt-8 flex justify-end">
+          <div className="mt-16 flex justify-center">
             <Pagination
               perPages={pagination.page}
               limitPages={pagination.limit}

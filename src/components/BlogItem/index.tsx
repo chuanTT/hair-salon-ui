@@ -4,7 +4,7 @@ import Images from "../Images";
 import { BsFillCalendarFill } from "react-icons/bs";
 import { formatDate } from "@/common/function";
 
-interface BlogItemProps {
+export interface BlogItemProps {
   title?: string;
   desc?: string;
   src?: string;
