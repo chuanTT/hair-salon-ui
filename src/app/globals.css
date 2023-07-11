@@ -25,3 +25,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+.mySwiper2 > * {
+  height: 100%;
+}
