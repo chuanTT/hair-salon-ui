@@ -24,6 +24,12 @@ export interface apiSildeProduct {
   };
 }
 
+export interface ImagesProduct {
+  id?: number;
+  thumb?: string;
+  index_thumb?: number;
+}
+
 export interface apiDataProduct {
   id?: number;
   name?: string;
@@ -34,6 +40,7 @@ export interface apiDataProduct {
   status?: number;
   created_at?: string;
   updated_at?: string;
+  description?: string;
   category?: {
     id?: number;
     name?: string;
@@ -45,11 +52,7 @@ export interface apiDataProduct {
     full_name?: string;
     avatar?: string;
   };
-  list_images: {
-    id?: number;
-    thumb?: string;
-    index_thumb?: number;
-  }[];
+  list_images: ImagesProduct[];
 }
 
 export interface apiDataSection {

@@ -106,6 +106,10 @@ const statusPrice = (isNegotiate: number , price: number = 0) => {
   return str
 };
 
+const statusProduct = (status?: number) => {
+  return status === 1 ? "Còn hàng": "Hết hàng"
+}
+
 export {
   isObject,
   isEmptyObj,
@@ -113,5 +117,6 @@ export {
   fucStyleCovert,
   fucFirtsChart,
   formatDate,
-  statusPrice
+  statusPrice,
+  statusProduct
 };

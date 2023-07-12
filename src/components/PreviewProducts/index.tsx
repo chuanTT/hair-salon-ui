@@ -9,14 +9,19 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
-import "./PreviewProducts.css"
+import "./PreviewProducts.css";
 
 // import required modules
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import Images from "../Images";
 import CustomNavigate from "../Banner/CustomNavigate";
+import { ImagesProduct, apiDataProduct } from "@/types";
 
-export default function PreviewProducts() {
+interface PreviewProductsProps {
+  list_images?: apiDataProduct["list_images"];
+}
+
+export default function PreviewProducts({ list_images }: PreviewProductsProps) {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperRef | null>(null);
 
   return (
@@ -31,21 +36,13 @@ export default function PreviewProducts() {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2 group"
       >
-        {Array(10)
-          .fill("")
-          .map((_, index: number) => {
-            return (
-              <SwiperSlide key={index}>
-                <Images
-                  w={"100%"}
-                  h={"100%"}
-                  src={`https://swiperjs.com/demos/images/nature-${
-                    index + 1
-                  }.jpg`}
-                />
-              </SwiperSlide>
-            );
-          })}
+        {list_images?.map((image: ImagesProduct, index: number) => {
+          return (
+            <SwiperSlide key={index}>
+              <Images w={"100%"} h={"100%"} src={image?.thumb} />
+            </SwiperSlide>
+          );
+        })}
 
         <CustomNavigate />
       </Swiper>
@@ -63,21 +60,13 @@ export default function PreviewProducts() {
           marginTop: 5,
         }}
       >
-        {Array(10)
-          .fill("")
-          .map((_, index: number) => {
-            return (
-              <SwiperSlide key={index}>
-                <Images
-                  w={"100%"}
-                  h={"100%"}
-                  src={`https://swiperjs.com/demos/images/nature-${
-                    index + 1
-                  }.jpg`}
-                />
-              </SwiperSlide>
-            );
-          })}
+        {list_images?.map((image: ImagesProduct, index: number) => {
+          return (
+            <SwiperSlide key={index}>
+              <Images w={"100%"} h={"100%"} src={image?.thumb} />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </>
   );

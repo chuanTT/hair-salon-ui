@@ -1,6 +1,16 @@
 import { useFetchingApiParmeter } from "@/hook/useFetchingApi";
-import { getBlog, getRelatedBlog, tableBlog, tableRelatedNews } from "@/services/blogApi";
-import { getProduct, tableProduct } from "@/services/product";
+import {
+  getBlog,
+  getRelatedBlog,
+  tableBlog,
+  tableRelatedNews,
+} from "@/services/blogApi";
+import {
+  getProduct,
+  getRelatedProduct,
+  tableProduct,
+  tableRelatedProduct,
+} from "@/services/product";
 import { getSection, tableSection } from "@/services/sectionApi";
 
 const configSection: useFetchingApiParmeter = {
@@ -39,4 +49,23 @@ const configRelatedBlog = (alias?: string): useFetchingApiParmeter => {
   };
 };
 
-export { configSection, configProduct, configBlog, configRelatedBlog };
+const configRelatedProduct = (
+  alias?: string,
+  cate_id?: number
+): useFetchingApiParmeter => {
+  return {
+    nameTable: tableRelatedProduct,
+    CallAPi: getRelatedProduct,
+    customUrl: ({ query, nameTable }) => {
+      let url = query?.for(`${nameTable}/${alias}`);
+      if (cate_id) {
+        url = url?.params({
+          cate_id,
+        });
+      }
+      return url?.url();
+    },
+  };
+};
+
+export { configSection, configProduct, configBlog, configRelatedBlog, configRelatedProduct };
