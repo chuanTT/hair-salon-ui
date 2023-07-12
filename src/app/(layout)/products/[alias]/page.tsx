@@ -1,4 +1,5 @@
 import Images from "@/components/Images";
+import PreviewProducts from "@/components/PreviewProducts";
 import ProductItem from "@/components/ProductItem";
 import { BASE_URL } from "@/services/axiosClient";
 import { apiDataProduct } from "@/types";
@@ -22,15 +23,8 @@ const Details = ({ params }: { params: { alias: string } }) => {
   return (
     <>
       <div className="flex gap-8">
-        <div className="h-[500px] w-1/2">
-          <Images
-            w={"100%"}
-            h={"100%"}
-            alt={""}
-            src={
-              "https://theme.hstatic.net/200000695155/1001036967/14/slider_1.jpg?v=495"
-            }
-          />
+        <div className="h-[600px] w-1/2">
+          <PreviewProducts />
         </div>
 
         <div>

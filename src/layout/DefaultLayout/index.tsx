@@ -3,6 +3,7 @@ import Footer from "../Footer";
 import Header from "../Header";
 import { defaultProps } from "@/types";
 import ProviderSettings from "../ProviderSettings";
+import PluginChat from "@/components/PluginChat";
 
 const DefaultLayout: FC<defaultProps> = ({ children }) => {
   return (
@@ -14,6 +15,8 @@ const DefaultLayout: FC<defaultProps> = ({ children }) => {
         </main>
         <Footer />
       </div>
+
+      <PluginChat />
     </ProviderSettings>
   );
 };
