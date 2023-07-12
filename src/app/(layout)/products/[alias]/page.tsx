@@ -1,7 +1,24 @@
 import Images from "@/components/Images";
 import ProductItem from "@/components/ProductItem";
+import { BASE_URL } from "@/services/axiosClient";
+import { apiDataProduct } from "@/types";
+import { use } from "react";
 
-const Details = () => {
+const getProductAlias = async (alias: string) => {
+  const res = await fetch(`${BASE_URL}/product/${alias}`, {
+    next: {
+      revalidate: 60,
+    },
+  });
+
+  if (res?.ok) {
+    return res.json();
+  }
+};
+
+const Details = ({ params }: { params: { alias: string } }) => {
+  const data: apiDataProduct = use(getProductAlias(params?.alias))
+
   return (
     <>
       <div className="flex gap-8">
@@ -32,7 +49,9 @@ const Details = () => {
 
       <div className="mt-14">
         <div className="border border-b-0 w-fit">
-          <span className="block px-5 py-2 text-base font-medium text-white bg-gray-800">Mô tả chi tiết</span>
+          <span className="block px-5 py-2 text-base font-medium text-white bg-gray-800">
+            Mô tả chi tiết
+          </span>
         </div>
 
         <div className="border p-4">

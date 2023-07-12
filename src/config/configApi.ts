@@ -1,5 +1,5 @@
 import { useFetchingApiParmeter } from "@/hook/useFetchingApi";
-import { getBlog, tableBlog } from "@/services/blogApi";
+import { getBlog, getRelatedBlog, tableBlog, tableRelatedNews } from "@/services/blogApi";
 import { getProduct, tableProduct } from "@/services/product";
 import { getSection, tableSection } from "@/services/sectionApi";
 
@@ -29,4 +29,14 @@ const configBlog: useFetchingApiParmeter = {
   limit: 3,
 };
 
-export { configSection, configProduct, configBlog };
+const configRelatedBlog = (alias?: string): useFetchingApiParmeter => {
+  return {
+    nameTable: tableRelatedNews,
+    CallAPi: getRelatedBlog,
+    customUrl: ({ query, nameTable }) => {
+      return query?.for(`${nameTable}/${alias}`).url();
+    },
+  };
+};
+
+export { configSection, configProduct, configBlog, configRelatedBlog };
