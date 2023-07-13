@@ -30,3 +30,9 @@
 .mySwiper2 > * {
   height: 100%;
 }
+
+@media screen and (max-width: 1024px) {
+  .container {
+    padding: 0px 15px;
+  }
+}

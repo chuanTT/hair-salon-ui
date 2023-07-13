@@ -4,12 +4,12 @@ import BlogItem from "@/components/BlogItem";
 import ProductItem from "@/components/ProductItem";
 import Section from "@/components/Section";
 import SectionHeader from "@/components/SectionHeader";
+import WapperLayout from "@/components/WapperLayout";
 import { configBlog, configProduct, configSection } from "@/config/configApi";
 import useFetchingApi from "@/hook/useFetchingApi";
 import { apiDataBlog, apiDataProduct, apiDataSection } from "@/types";
 
 export default function Home() {
-  
   const { data: ProductData } = useFetchingApi(configProduct);
   const { data: BlogData } = useFetchingApi(configBlog);
   const { data: SectionData } = useFetchingApi(configSection);
@@ -20,7 +20,7 @@ export default function Home() {
 
       <div className="mt-16">
         <SectionHeader title="Sản phẩm" desc="Cập nhật mới nhất" />
-        <div className="mt-16 grid grid-cols-3 gap-5">
+        <WapperLayout>
           {ProductData?.data?.data &&
             ProductData?.data?.data?.map(
               (product: apiDataProduct, index: number) => {
@@ -39,7 +39,7 @@ export default function Home() {
                 );
               }
             )}
-        </div>
+        </WapperLayout>
       </div>
 
       {SectionData?.data?.data &&
@@ -63,7 +63,7 @@ export default function Home() {
         <div className="mt-16">
           <SectionHeader title="Tin tức" desc="Thông tin cập nhật" />
 
-          <div className="mt-16 flex gap-5 [&>*]:w-1/3">
+          <WapperLayout>
             {BlogData?.data?.data?.map((blog: apiDataBlog, index: number) => {
               return (
                 <BlogItem
@@ -76,7 +76,7 @@ export default function Home() {
                 />
               );
             })}
-          </div>
+          </WapperLayout>
         </div>
       )}
     </div>

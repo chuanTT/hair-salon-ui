@@ -27,7 +27,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-800 pt-11 pb-3 px-4 flex justify-center">
       <div className="container">
-        <div className="grid grid-cols-3 text-white items-end">
+        <div className="grid grid-cols-3 text-white items-end max-lg:grid-cols-2 max-sm:gap-5 sm:gap-3 max-sm:!grid-cols-1">
           <div>
             <div className="h-[45px] w-[216px] relative">
               <Images
@@ -42,9 +42,9 @@ const Footer = () => {
             <h2 className="mt-5 text-xl font-medium">Thông tin công ty</h2>
 
             <div className="space-y-3 mt-4">
-              <div className="flex items-center space-x-2">
-                <IoLocation size={20} />
-                <span className="text-sm">
+              <div className="flex space-x-2">
+                <IoLocation size={20} className="flex-shrink-0" />
+                <span className="text-sm block w-full break-words">
                   <Link
                     rel="noreferrer"
                     target="_blank"
@@ -55,18 +55,18 @@ const Footer = () => {
                 </span>
               </div>
 
-              <div className="flex items-center space-x-2">
-                <BiSolidPhoneCall size={20} />
-                <span className="text-sm">
+              <div className="flex space-x-2">
+                <BiSolidPhoneCall size={20} className="flex-shrink-0" />
+                <span className="text-sm block w-full break-words">
                   <a rel="nofollow" href={`tel:${data?.company?.phone}`}>
                     {data?.company?.phone}
                   </a>
                 </span>
               </div>
 
-              <div className="flex items-center space-x-2">
-                <MdMarkEmailRead size={20} />
-                <span className="text-sm">
+              <div className="flex space-x-2">
+                <MdMarkEmailRead size={20} className="flex-shrink-0" />
+                <span className="text-sm block w-full break-words">
                   <a rel="nofollow" href={`mailto:${data?.company?.email}`}>
                     {data?.company?.email}
                   </a>
@@ -74,31 +74,32 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="space-y-3">
-            <div className="flex items-center space-x-2">
-              <IoChevronForwardOutline size={20} />
+          <div className="sm:space-y-3 max-sm:col-span-3 max-sm:flex max-sm:items-center max-sm:flex-wrap max-sm:gap-5">
+            <div className="flex space-x-2">
+              <IoChevronForwardOutline size={20} className="flex-shrink-0" />
               <span className="text-sm">
                 <Link href={"/"}>Giới thiệu</Link>
               </span>
             </div>
 
-            <div className="flex items-center space-x-2">
-              <IoChevronForwardOutline size={20} />
+            <div className="flex space-x-2">
+              <IoChevronForwardOutline size={20} className="flex-shrink-0" />
               <span className="text-sm">
                 <Link href={"/"}>Sản phẩm</Link>
               </span>
             </div>
 
-            <div className="flex items-center space-x-2">
-              <IoChevronForwardOutline size={20} />
+            <div className="flex space-x-2">
+              <IoChevronForwardOutline size={20} className="flex-shrink-0" />
               <span className="text-sm">
                 <Link href={"/"}>Tin tức</Link>
               </span>
             </div>
           </div>
-          <div className="flex items-center flex-col">
+          <div className="flex items-center flex-col max-lg:col-span-3">
             {!!data?.company?.link_page?.is_show_page && (
               <iframe
+                className="lg:w-full max-lg:flex max-lg:justify-center"
                 src={`https://www.facebook.com/plugins/page.php?href=${data?.company?.link_page?.url}&amp;tabs=timeline&amp;width=375&amp;height=130&amp;small_header=false&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=true&amp;appId`}
                 width="375"
                 height="130"

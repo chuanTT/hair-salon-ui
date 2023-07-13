@@ -30,7 +30,7 @@ const Banner = () => {
   });
 
   return (
-    <div className="banner h-[500px] bg-slate-500 relative [&>*]:h-full group">
+    <div className="banner max-lg:h-[300px] h-[500px] bg-slate-500 relative [&>*]:h-full group">
       <Swiper
         modules={[Autoplay, Pagination, Navigation]}
         pagination={{
