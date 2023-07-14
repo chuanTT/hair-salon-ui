@@ -8,8 +8,13 @@ import { MdMarkEmailRead } from "react-icons/md";
 import { useSettings } from "../ProviderSettings";
 import Images from "@/components/Images";
 import { setStyleImageSettings } from "@/common/function";
+import { HeaderLink } from "@/config/configStatic";
 
 const Footer = () => {
+  const [dataLinkFooter] = useState(() => {
+    const [, ...spread] = HeaderLink;
+    return spread;
+  });
   const { data } = useSettings();
   const date = new Date();
   const [settingsImg, setSettingsImg] = useState({});
@@ -75,26 +80,19 @@ const Footer = () => {
             </div>
           </div>
           <div className="sm:space-y-3 max-sm:col-span-3 max-sm:flex max-sm:items-center max-sm:flex-wrap max-sm:gap-5">
-            <div className="flex space-x-2">
-              <IoChevronForwardOutline size={20} className="flex-shrink-0" />
-              <span className="text-sm">
-                <Link href={"/"}>Giới thiệu</Link>
-              </span>
-            </div>
-
-            <div className="flex space-x-2">
-              <IoChevronForwardOutline size={20} className="flex-shrink-0" />
-              <span className="text-sm">
-                <Link href={"/"}>Sản phẩm</Link>
-              </span>
-            </div>
-
-            <div className="flex space-x-2">
-              <IoChevronForwardOutline size={20} className="flex-shrink-0" />
-              <span className="text-sm">
-                <Link href={"/"}>Tin tức</Link>
-              </span>
-            </div>
+            {dataLinkFooter.map((linkFooter, index) => {
+              return (
+                <div className="flex space-x-2" key={index}>
+                  <IoChevronForwardOutline
+                    size={20}
+                    className="flex-shrink-0"
+                  />
+                  <span className="text-sm">
+                    <Link href={linkFooter.path}>{linkFooter.title}</Link>
+                  </span>
+                </div>
+              );
+            })}
           </div>
           <div className="flex items-center flex-col max-lg:col-span-3">
             {!!data?.company?.link_page?.is_show_page && (

@@ -88,3 +88,9 @@ export interface paginationType {
   total: number
 }
 
+
+export interface LinkDefaultProps {
+  title: string;
+  path: string;
+}
+

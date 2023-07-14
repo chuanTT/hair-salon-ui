@@ -6,32 +6,8 @@ import { CgMenuRight } from "react-icons/cg";
 import { useSettings } from "../ProviderSettings";
 import Images from "@/components/Images";
 import { setStyleImageSettings } from "@/common/function";
-
-interface LinkDefaultProps {
-  title: string;
-  path: string;
-}
-
-const HeaderLink: LinkDefaultProps[] = [
-  {
-    title: "Trang chủ",
-    path: "/",
-  },
-  {
-    title: "Giới thiệu",
-    path: "/gioi-thieu",
-  },
-
-  {
-    title: "Sản phẩm",
-    path: "/san-pham",
-  },
-
-  {
-    title: "Tin tức",
-    path: "/tin-tuc",
-  },
-];
+import { LinkDefaultProps } from "@/types";
+import { HeaderLink } from "@/config/configStatic";
 
 const Header = () => {
   const { data } = useSettings();
