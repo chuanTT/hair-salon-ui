@@ -34,7 +34,7 @@ const Footer = () => {
       <div className="container">
         <div className="grid grid-cols-3 text-white items-end max-lg:grid-cols-2 max-sm:gap-5 sm:gap-3 max-sm:!grid-cols-1">
           <div>
-            <div className="h-[45px] w-[216px] relative">
+            <div className="h-[45px] w-[216px] relative max-375:w-full">
               <Images
                 innerPropsImages={settingsImg}
                 w={"100%"}
@@ -79,7 +79,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="sm:space-y-3 max-sm:col-span-3 max-sm:flex max-sm:items-center max-sm:flex-wrap max-sm:gap-5">
+          <div className="sm:space-y-3 max-sm:col-span-1 max-sm:flex max-sm:items-center max-sm:flex-wrap max-sm:gap-5">
             {dataLinkFooter.map((linkFooter, index) => {
               return (
                 <div className="flex space-x-2" key={index}>
@@ -94,15 +94,18 @@ const Footer = () => {
               );
             })}
           </div>
-          <div className="flex items-center flex-col max-lg:col-span-3">
+          <div className="flex items-center flex-col max-lg:col-span-2 max-sm:!col-span-1">
             {!!data?.company?.link_page?.is_show_page && (
               <iframe
-                className="lg:w-full max-lg:flex max-lg:justify-center"
-                src={`https://www.facebook.com/plugins/page.php?href=${data?.company?.link_page?.url}&amp;tabs=timeline&amp;width=375&amp;height=130&amp;small_header=false&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=true&amp;appId`}
-                width="375"
+                src={`https://www.facebook.com/plugins/page.php?href=${data?.company?.link_page?.url}&tabs&width=340&height=130&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=false&appId=265183975927547`}
+                width="340"
                 height="130"
+                style={{ border: "none", overflow: "hidden" }}
+                scrolling="no"
+                frameBorder="0"
                 allowFullScreen={true}
                 allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                className="max-375:hidden"
               ></iframe>
             )}
 
