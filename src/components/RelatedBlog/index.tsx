@@ -5,6 +5,7 @@ import BlogItem from "../BlogItem";
 import { configRelatedBlog } from "@/config/configApi";
 import { apiDataBlog } from "@/types";
 import LoadingBlog from "../LoadingBlog";
+import WapperLayout from "../WapperLayout";
 
 interface RelatedBlogProps {
   alias?: string;
@@ -15,22 +16,26 @@ const RelatedBlog: FC<RelatedBlogProps> = ({ alias }) => {
 
   return (
     <div className="mt-32">
-      <h6 className="text-xl text-grayText mb-5">Tin tức liên quan</h6>
+      {data?.data && (
+        <>
+          <h6 className="text-xl text-grayText mb-5">Tin tức liên quan</h6>
 
-      <Suspense fallback={<LoadingBlog />}>
-        <div className="grid grid-cols-3 gap-5">
-          {data?.data?.map((blog: apiDataBlog, index: number) => (
-            <BlogItem
-              key={index}
-              desc={blog?.short_content}
-              title={blog?.title}
-              src={blog?.thumb}
-              date={blog?.created_at}
-              link={blog?.alias}
-            />
-          ))}
-        </div>
-      </Suspense>
+          <Suspense fallback={<LoadingBlog count={10} />}>
+            <WapperLayout classNameDiv="mt-5">
+              {data?.data?.map((blog: apiDataBlog, index: number) => (
+                <BlogItem
+                  key={index}
+                  desc={blog?.short_content}
+                  title={blog?.title}
+                  src={blog?.thumb}
+                  date={blog?.created_at}
+                  link={blog?.alias}
+                />
+              ))}
+            </WapperLayout>
+          </Suspense>
+        </>
+      )}
     </div>
   );
 };

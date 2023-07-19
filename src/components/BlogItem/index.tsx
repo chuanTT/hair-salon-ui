@@ -4,6 +4,7 @@ import Images from "../Images";
 import { BsFillCalendarFill } from "react-icons/bs";
 import { formatDate } from "@/common/function";
 import Shimmer from "../Shimmer";
+import config from "@/config";
 
 export interface BlogItemProps {
   title?: string;
@@ -22,11 +23,11 @@ const BlogItem: FC<BlogItemProps> = ({
   link,
   isShimmer,
 }) => {
-  const linkBlog = `/blog/${link}`;
+  const linkBlog = `${config.router.news}/${link}`;
 
   return (
     <div className="flex flex-col">
-      <div className="overflow-hidden group relative">
+      <div className="overflow-hidden group relative border shadow-md">
         <Link href={linkBlog} className="relative">
           <Images
             className="group-hover:scale-105 transition-all duration-300"

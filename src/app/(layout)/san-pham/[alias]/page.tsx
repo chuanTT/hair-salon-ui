@@ -1,31 +1,18 @@
-import { statusPrice, statusProduct } from "@/common/function";
-import Images from "@/components/Images";
-import PreviewProducts from "@/components/PreviewProducts";
-import ProductItem from "@/components/ProductItem";
-import RelatedProduct from "@/components/RelatedProduct";
-import { BASE_URL } from "@/services/axiosClient";
-import { apiDataProduct } from "@/types";
 import { use } from "react";
+import { statusPrice, statusProduct } from "@/common/function";
+import PreviewProducts from "@/components/PreviewProducts";
+import RelatedProduct from "@/components/RelatedProduct";
+import { getProduct, tableProduct } from "@/services/product";
+import { apiDataProduct } from "@/types";
 
-const getProductAlias = async (alias: string) => {
-  const res = await fetch(`${BASE_URL}/product/${alias}`, {
-    next: {
-      revalidate: 60,
-    },
-  });
-
-  if (res?.ok) {
-    return res.json();
-  }
-};
 
 const Details = ({ params }: { params: { alias: string } }) => {
-  const data: { data?: apiDataProduct } = use(getProductAlias(params?.alias));
+  const data: { data?: apiDataProduct } = use(getProduct(`/${tableProduct}/${params?.alias}`));
 
   return (
     <>
-      <div className="flex gap-8">
-        <div className="h-[600px] w-1/2">
+      <div className="flex gap-8 lg:[&>*]:w-1/2 max-lg:flex-col">
+        <div className="h-[600px]">
           <PreviewProducts list_images={data?.data?.list_images} />
         </div>
 
@@ -58,7 +45,7 @@ const Details = ({ params }: { params: { alias: string } }) => {
         </div>
 
         <div
-          className="border p-4"
+          className="border p-4 content_wapper"
           dangerouslySetInnerHTML={{ __html: data?.data?.description ?? "" }}
         />
       </div>

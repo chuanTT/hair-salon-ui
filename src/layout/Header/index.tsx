@@ -40,7 +40,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="sticky z-[999] bg-white shadow-lg h-[65px] top-0 left-0 w-full px-10 flex justify-center">
+    <header className="sticky z-[999] bg-white shadow-lg h-[65px] max-sm:px-0 top-0 left-0 w-full px-10 flex justify-center">
       <div className="container flex justify-between items-center h-full">
         <Link href={"/"}>
           <Images
@@ -73,7 +73,7 @@ const Header = () => {
         onClick={() => setShow(!show)}
       ></div>
       <div
-        className={`fixed bottom-0 top-0 w-[35%] bg-white shadow-lg z-40 p-5 transition-all duration-150 ${
+        className={`fixed bottom-0 top-0 w-[35%] max-sm:w-[50%] max-375:w-[80%] bg-white shadow-lg z-40 p-5 transition-all duration-150 ${
           show ? "left-0" : "-left-full"
         }`}
       >

@@ -2,28 +2,16 @@ import { formatDate } from "@/common/function";
 import Images from "@/components/Images";
 import RelatedBlog from "@/components/RelatedBlog";
 import LatestNews from "@/partials/Blog/LatestNews";
-import { BASE_URL } from "@/services/axiosClient";
+import { getBlog, tableBlog } from "@/services/blogApi";
 import { apiDataBlog } from "@/types";
 import { use } from "react";
 
-const getBlogAlias = async (alias: string) => {
-  const res = await fetch(`${BASE_URL}/blog/${alias}`, {
-    next: {
-      revalidate: 60,
-    },
-  });
-
-  if (res?.ok) {
-    return res.json();
-  }
-};
-
 const Details = ({ params }: { params: { alias: string } }) => {
-  const data: { data?: apiDataBlog } = use(getBlogAlias(params?.alias));
+  const data: { data?: apiDataBlog } = use(getBlog(`/${tableBlog}/${params?.alias}`));
 
   return (
     <>
-      <div className="flex gap-5">
+      <div className="flex gap-5 max-lg:flex-col max-lg:[&>*]:!w-full max-lg:!gap-10">
         <div className="w-3/4">
           <h1 className="text-2xl">{data?.data?.title}</h1>
 
@@ -44,7 +32,7 @@ const Details = ({ params }: { params: { alias: string } }) => {
           </div>
 
           <div
-            className="mt-4"
+            className="mt-4 content_wapper"
             dangerouslySetInnerHTML={{ __html: data?.data?.description ?? "" }}
           />
         </div>

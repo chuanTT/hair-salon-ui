@@ -29,7 +29,7 @@ const Section: FC<SectionProps> = ({
         } mt-20 gap-5 max-sm:mt-10`}
       >
         <div
-          className="w-1/2 max-sm:w-full"
+          className="w-1/2 max-sm:w-full content_wapper"
           dangerouslySetInnerHTML={{ __html: descSection ?? "" }}
         />
         <div className="w-1/2 max-sm:w-full">

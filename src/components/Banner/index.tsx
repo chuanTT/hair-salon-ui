@@ -14,6 +14,7 @@ import CustomNavigate from "./CustomNavigate";
 import useFetchingApi from "@/hook/useFetchingApi";
 import { getSliderProduct, tableSliderProduct } from "@/services/product";
 import { apiSildeProduct } from "@/types";
+import config from "@/config";
 
 const Banner = () => {
   const { data } = useFetchingApi({
@@ -46,7 +47,7 @@ const Banner = () => {
  
             return (
               <SwiperSlide key={index}>
-                <Link href={`/products/${item?.product?.alias}`}>
+                <Link href={`${config.router.product}/${item?.product?.alias}`}>
                   <Images
                     w={"100%"}
                     h={"100%"}

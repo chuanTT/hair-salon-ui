@@ -16,7 +16,7 @@ const DefaultLayout: FC<defaultProps> = ({ children }) => {
         <Footer />
       </div>
 
-      <PluginChat />
+      {/* <PluginChat /> */}
     </ProviderSettings>
   );
 };

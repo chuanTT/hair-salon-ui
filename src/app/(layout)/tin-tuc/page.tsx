@@ -1,17 +1,26 @@
 "use client";
+import { useState } from "react";
 import BlogItem from "@/components/BlogItem";
+import WapperPagination from "@/components/WapperPagination";
 import { configBlog } from "@/config/configApi";
 import useFetchingApi from "@/hook/useFetchingApi";
-import { apiDataBlog } from "@/types";
+import { apiDataBlog, paginationType } from "@/types";
 
-const Blog = async () => {
-  const { data: BlogData } = useFetchingApi({
+const Blog = () => {
+  const [page, setPage] = useState(1);
+  const { data: BlogData, isFetched } = useFetchingApi({
     ...configBlog,
-    limit: 30,
+    limit: 10,
+    page,
   });
+  const pagination: paginationType = BlogData?.data?.pagination;
 
   return (
-    <div className="grid grid-cols-3 gap-5">
+    <WapperPagination
+      isFetched={isFetched}
+      pagination={pagination}
+      setPage={setPage}
+    >
       {BlogData?.data?.data &&
         BlogData?.data?.data?.map((blog: apiDataBlog, index: number) => (
           <BlogItem
@@ -23,7 +32,7 @@ const Blog = async () => {
             link={blog?.alias}
           />
         ))}
-    </div>
+    </WapperPagination>
   );
 };
 
