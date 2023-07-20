@@ -97,18 +97,37 @@ const numberMoneyVND = (num: string | number) => {
   return t;
 };
 
-const statusPrice = (isNegotiate: number , price: number = 0) => {
+const statusPrice = (isNegotiate: number, price: number = 0) => {
   const isCheck = isNegotiate === 1;
   let str = isCheck ? "Thỏa thuận" : "0";
 
   if (!isCheck) str = numberMoneyVND(price);
 
-  return str
+  return str;
 };
 
 const statusProduct = (status?: number) => {
-  return status === 1 ? "Còn hàng": "Hết hàng"
-}
+  return status === 1 ? "Còn hàng" : "Hết hàng";
+};
+
+const joinUrl = (
+  dir?: string,
+  BASE_URL: string = process.env.NEXT_PUBLIC_BASE_URL ?? "/",
+  link = "/"
+) => {
+  const maxlength = BASE_URL.length;
+  const str = BASE_URL.substring(maxlength - 1, maxlength);
+  if (str !== link ) {
+    BASE_URL += link;
+  }
+
+  if (dir) {
+    dir = dir.replace(/^[\/]{1,}/, "")
+    return `${BASE_URL}${dir}`;
+  } else {
+    return BASE_URL;
+  }
+};
 
 export {
   isObject,
@@ -118,5 +137,6 @@ export {
   fucFirtsChart,
   formatDate,
   statusPrice,
-  statusProduct
+  statusProduct,
+  joinUrl,
 };

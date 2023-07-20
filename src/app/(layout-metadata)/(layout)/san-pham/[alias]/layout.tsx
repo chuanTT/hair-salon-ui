@@ -1,3 +1,4 @@
+import { joinUrl } from "@/common/function";
 import config from "@/config";
 import { getProduct, tableProduct } from "@/services/product";
 import { apiDataProduct, defaultProps } from "@/types";
@@ -13,9 +14,6 @@ export const generateMetadata = async ({
     `/${tableProduct}/${params?.alias}`
   );
   const result = dataProductDetail?.data;
-  // const base_url = new URL('')
-
-  console.log();
 
   return {
     title: result?.name,
@@ -26,7 +24,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: result?.name,
       description: result?.short_content,
-      url: "https://nextjs.org",
+      url: joinUrl(`${config.router.product}/${result?.alias}`),
       images: [
         {
           url: result?.list_images?.[0]?.thumb || "",

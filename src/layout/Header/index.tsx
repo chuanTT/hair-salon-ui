@@ -31,13 +31,13 @@ const Header = () => {
         setShow(false);
       }
     };
-    resizeNav()
+    resizeNav();
     window.addEventListener("resize", resizeNav);
     return () => {
       window.removeEventListener("resize", resizeNav);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [show]);
 
   return (
     <header className="sticky z-[999] bg-white shadow-lg h-[65px] max-sm:px-0 top-0 left-0 w-full px-10 flex justify-center">
@@ -52,7 +52,11 @@ const Header = () => {
           />
         </Link>
 
-        <CgMenuRight onClick={() => setShow(!show)} size={25} className="cursor-pointer lg:hidden" />
+        <CgMenuRight
+          onClick={() => setShow(!show)}
+          size={25}
+          className="cursor-pointer lg:hidden"
+        />
         <div className="flex items-center [&>*]:px-5 max-lg:hidden">
           {HeaderLink.map((header, index) => {
             return (
@@ -78,7 +82,7 @@ const Header = () => {
         }`}
       >
         <div className="flex justify-center">
-          <Link href={"/"}>
+          <Link href={"/"} onClick={() => setShow(!show)}>
             <Images
               w={134}
               h={45}
@@ -93,7 +97,11 @@ const Header = () => {
           {HeaderLink.map((config: LinkDefaultProps, index: number) => {
             return (
               <div className="flex items-start" key={index}>
-                <Link href={config.path} className={`font-medium`}>
+                <Link
+                  href={config.path}
+                  className={`font-medium`}
+                  onClick={() => setShow(!show)}
+                >
                   {config.title}
                 </Link>
               </div>
