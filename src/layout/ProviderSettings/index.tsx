@@ -1,5 +1,5 @@
 "use client";
-import { FC, createContext, useContext, useEffect } from "react";
+import { FC, createContext, useContext } from "react";
 
 import useFetchingApi from "@/hook/useFetchingApi";
 import { getSettings, tableSettings } from "@/services/otherApi";
@@ -53,16 +53,16 @@ const ProviderSettings: FC<defaultProps> = ({ children }) => {
     },
   });
 
-  useEffect(() => {
-    if (data?.data) {
-      if (document !== undefined) {
-        const linkIcon = document.querySelector('link[rel="icon"]');
-        if (linkIcon) {
-          linkIcon.setAttribute("href", data?.data?.icon);
-        }
-      }
-    }
-  }, [data?.data]);
+  // useEffect(() => {
+  //   if (data?.data) {
+  //     if (document !== undefined) {
+  //       const linkIcon = document.querySelector('link[rel="icon"]');
+  //       if (linkIcon) {
+  //         linkIcon.setAttribute("href", data?.data?.icon);
+  //       }
+  //     }
+  //   }
+  // }, [data?.data]);
 
   const values: valuesSettings = {
     data: data?.data,

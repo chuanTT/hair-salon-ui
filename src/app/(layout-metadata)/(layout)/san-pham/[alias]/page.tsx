@@ -1,4 +1,5 @@
 import { use } from "react";
+import { Metadata } from "next";
 import { statusPrice, statusProduct } from "@/common/function";
 import PreviewProducts from "@/components/PreviewProducts";
 import RelatedProduct from "@/components/RelatedProduct";

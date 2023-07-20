@@ -6,6 +6,7 @@ import { configBlog } from "@/config/configApi";
 import useFetchingApi from "@/hook/useFetchingApi";
 import { apiDataBlog, paginationType } from "@/types";
 
+
 const Blog = () => {
   const [page, setPage] = useState(1);
   const { data: BlogData, isFetched } = useFetchingApi({
