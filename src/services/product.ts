@@ -3,7 +3,7 @@ import HTTP from "./axiosClient"
 const tableProduct = "product"
 const tableSliderProduct = "slider-product"
 const tableRelatedProduct = "related_product"
-const tableRelatedNews="related_news"
+const tableCategory = "category"
 
 const getProduct = (url: string) => {
   return HTTP.get(url)
@@ -11,6 +11,10 @@ const getProduct = (url: string) => {
 
 const getSliderProduct = (url: string) => {
   return HTTP.get(`/${tableProduct}${url}`)
+}
+
+const getCategory = (url: string) => {
+  return HTTP.get(url)
 }
 
 const getRelatedProduct = (url: string) => {
@@ -24,5 +28,7 @@ export {
   getSliderProduct,
   tableSliderProduct,
   tableRelatedProduct,
-  getRelatedProduct
+  getRelatedProduct,
+  getCategory,
+  tableCategory
 }

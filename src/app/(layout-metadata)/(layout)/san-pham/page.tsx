@@ -6,13 +6,30 @@ import useFetchingApi from "@/hook/useFetchingApi";
 import { apiDataProduct, paginationType } from "@/types";
 import WapperPagination from "@/components/WapperPagination";
 import LoadingProduct from "@/components/LoadingProduct";
+import FilterProduct from "@/partials/Products/FilterProduct";
+import config from "@/config";
+
+export interface typeFilterProduct {
+  cate_id?: number;
+  name?: string;
+}
 
 const Products = () => {
   const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState<typeFilterProduct>({
+    cate_id: -1,
+    name: "",
+  });
   const { data: ProductData, isFetched } = useFetchingApi({
     ...configProduct,
     limit: 10,
     page,
+    customUrl({ query, nameTable, page, limit }) {
+      const url = query?.for(nameTable).page(page).limit(limit);
+      const obj = config.filter.product({ filter });
+      url?.params(obj);
+      return url?.url();
+    },
   });
 
   const pagination: paginationType = ProductData?.data?.pagination;
@@ -22,19 +39,7 @@ const Products = () => {
       <div className="flex justify-between gap-5 flex-wrap">
         <h2 className="text-xl font-medium">Tất cả sản phẩm</h2>
 
-        <div className="flex gap-3 flex-wrap [&>*]:w-72 max-sm:[&>*]:w-full max-sm:w-full">
-          <input
-            className="bg-gray-50 border outline-none border-gray-300 text-gray-900 text-sm rounded block p-2"
-            type="text"
-            placeholder="Tìm kiếm sản phẩm theo tên"
-          />
-
-          <input
-            className="bg-gray-50 border outline-none border-gray-300 text-gray-900 text-sm rounded block p-2"
-            type="text"
-            placeholder="Tìm kiếm sản phẩm theo tên"
-          />
-        </div>
+        <FilterProduct filter={filter} setFilter={setFilter} setPage={setPage} />
       </div>
       <Suspense fallback={<LoadingProduct />}>
         <WapperPagination

@@ -94,3 +94,19 @@ export interface LinkDefaultProps {
   path: string;
 }
 
+export interface SelectDefault {
+  value?: string | number
+  label?: string | number
+}
+
+
+export interface typeFilterProduct {
+  cate_id?: number;
+  name?: string;
+}
+
+
+export interface optionType {
+  value?: number | string
+  label?: string | number
+}
