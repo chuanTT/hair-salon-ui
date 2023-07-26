@@ -1,5 +1,5 @@
 "use client";
-import { FC, createContext, useContext } from "react";
+import { FC, createContext, useContext, useEffect } from "react";
 
 import useFetchingApi from "@/hook/useFetchingApi";
 import { getSettings, tableSettings } from "@/services/otherApi";

@@ -5,6 +5,7 @@ import { getCategory, tableCategory } from "@/services/product";
 import Select from "react-select";
 import { optionType, typeFilterProduct } from "@/types";
 import { convertViToEn } from "@/common/function";
+import { useDebounce } from "rooks";
 const customStyles = {
   control: (base: any, state: any) => ({
     ...base,
@@ -58,6 +59,7 @@ const FilterProduct: FC<FilterProductProps> = ({
   setFilter,
   setPage,
 }) => {
+  const setInputChangeDebounce = useDebounce(setFilter, 800);
   const { option: options, setSearch } = useFethingOptionApi({
     nameTable: tableCategory,
     CallAPi: getCategory,
@@ -65,6 +67,8 @@ const FilterProduct: FC<FilterProductProps> = ({
     keySearching: "name",
     isOptionAll: true,
   });
+
+  const setSearchDebounce = useDebounce(setSearch, 800);
 
   const customFilter = (option: optionType, inputValue: string) => {
     const labelConvert = convertViToEn(option?.label || "");
@@ -83,10 +87,10 @@ const FilterProduct: FC<FilterProductProps> = ({
     });
 
     if (searching && searching?.length <= 0) {
-    //   setValueDebounced(
-    //     (inputValueConvert && inputValueConvert.replace(/^\s+|\s+$/gm, "")) ||
-    //       ""
-    //   );
+      setSearchDebounce(
+        (inputValueConvert && inputValueConvert.replace(/^\s+|\s+$/gm, "")) ||
+          ""
+      );
     }
     return serching;
   };
@@ -107,6 +111,7 @@ const FilterProduct: FC<FilterProductProps> = ({
               }));
             }
           }}
+          filterOption={customFilter}
         />
       </div>
 
@@ -114,9 +119,8 @@ const FilterProduct: FC<FilterProductProps> = ({
         className="bg-gray-50 border outline-none border-gray-300 text-gray-900 text-sm rounded block p-2"
         type="text"
         placeholder="Tìm kiếm sản phẩm theo tên"
-        value={filter.name}
         onChange={(e) => {
-          setFilter((prev) => ({ ...prev, name: e.target.value }));
+          setInputChangeDebounce((prev) => ({ prev, name: e.target.value }));
           setPage(1);
         }}
       />

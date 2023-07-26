@@ -8,6 +8,8 @@ import WapperPagination from "@/components/WapperPagination";
 import LoadingProduct from "@/components/LoadingProduct";
 import FilterProduct from "@/partials/Products/FilterProduct";
 import config from "@/config";
+import Images from "@/components/Images";
+import StaticImages from "@/assets/img";
 
 export interface typeFilterProduct {
   cate_id?: number;
@@ -39,7 +41,11 @@ const Products = () => {
       <div className="flex justify-between gap-5 flex-wrap">
         <h2 className="text-xl font-medium">Tất cả sản phẩm</h2>
 
-        <FilterProduct filter={filter} setFilter={setFilter} setPage={setPage} />
+        <FilterProduct
+          filter={filter}
+          setFilter={setFilter}
+          setPage={setPage}
+        />
       </div>
       <Suspense fallback={<LoadingProduct />}>
         <WapperPagination
@@ -65,6 +71,19 @@ const Products = () => {
                 );
               }
             )}
+
+          {isFetched &&(!ProductData?.data?.data ||
+            ProductData?.data?.data?.length <= 0) && (
+            <div className="col-span-3 max-lg:col-span-2 max-sm:col-span-1 text-center">
+              <div className="flex justify-center mb-3">
+                <Images w={300} h={250} src={StaticImages.noResult} />
+              </div>
+
+              <span className="text-base font-medium text-grayText">
+                Không tìm thấy dữ liệu
+              </span>
+            </div>
+          )}
         </WapperPagination>
       </Suspense>
     </>

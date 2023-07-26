@@ -4,13 +4,14 @@ import { BlogItemProps } from "../BlogItem";
 import { formatDate } from "@/common/function";
 import Link from "next/link";
 import Shimmer from "../Shimmer";
+import config from "@/config";
 
 interface LatestNewsItemProps extends BlogItemProps {
     isShimmer?: boolean
 }
 
 const LatestNewsItem: FC<LatestNewsItemProps> = ({ date, link, src, title, isShimmer }) => {
-  const LinkBlogLatest = `/blog/${link}`;
+  const LinkBlogLatest = `${config.router.news}/${link}`;
   return (
     <div className="flex gap-2">
       <div className="overflow-hidden rounded flex-shrink-0">

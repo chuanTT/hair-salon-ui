@@ -105,6 +105,10 @@ export interface typeFilterProduct {
   name?: string;
 }
 
+export interface typeFilterBlog {
+  title?: string;
+}
+
 
 export interface optionType {
   value?: number | string

@@ -1,6 +1,6 @@
 
 import { convertViToEn } from "@/common/function";
-import { typeFilterProduct } from "@/types";
+import { typeFilterBlog, typeFilterProduct } from "@/types";
 
 const config = {
   router: {
@@ -19,6 +19,16 @@ const config = {
 
       if (filter?.name) {
         obj = { ...obj, name: convertViToEn(filter?.name) };
+      }
+
+      return obj;
+    },
+
+    blog: ({ filter }: { filter: typeFilterBlog }) => {
+      let obj = {};
+
+      if (filter?.title) {
+        obj = { ...obj, title: convertViToEn(filter?.title) };
       }
 
       return obj;

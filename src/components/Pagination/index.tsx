@@ -12,10 +12,10 @@ function Pagination({ perPages, totalPages, limitPages, onPagesChanges }: Pagina
   return (
     <PaginationPages
       customClassNames={{
-        rpbItemClassNameActive: "!bg-indigo-500 !text-white",
+        rpbItemClassNameActive: "!bg-orange-500 !text-white",
         rpbItemClassNameDisable: "hidden",
         rpbItemClassName:
-          "inline-flex items-center justify-center leading-5 px-3.5 py-2 bg-white hover:!bg-indigo-500 border border-slate-200 hover:text-white cursor-pointer text-slate-600"
+          "inline-flex items-center justify-center leading-5 px-3.5 py-2 bg-white hover:!bg-orange-500 border border-slate-200 hover:text-white cursor-pointer text-slate-600"
       }}
       currentPage={perPages}
       itemsPerPage={limitPages}
