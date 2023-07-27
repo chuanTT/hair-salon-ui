@@ -1,11 +1,10 @@
 "use client";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import ProductItem from "@/components/ProductItem";
 import { configProduct } from "@/config/configApi";
 import useFetchingApi from "@/hook/useFetchingApi";
 import { apiDataProduct, paginationType } from "@/types";
 import WapperPagination from "@/components/WapperPagination";
-import LoadingProduct from "@/components/LoadingProduct";
 import FilterProduct from "@/partials/Products/FilterProduct";
 import config from "@/config";
 import Images from "@/components/Images";
@@ -22,6 +21,7 @@ const Products = () => {
     cate_id: -1,
     name: "",
   });
+
   const { data: ProductData, isFetched } = useFetchingApi({
     ...configProduct,
     limit: 10,
@@ -47,32 +47,32 @@ const Products = () => {
           setPage={setPage}
         />
       </div>
-      <Suspense fallback={<LoadingProduct />}>
-        <WapperPagination
-          isFetched={isFetched}
-          pagination={pagination}
-          setPage={setPage}
-        >
-          {ProductData?.data?.data &&
-            ProductData?.data?.data?.map(
-              (product: apiDataProduct, index: number) => {
-                return (
-                  <ProductItem
-                    key={index}
-                    desc={product?.short_content}
-                    title={product?.name}
-                    src={product?.list_images?.[0]?.thumb}
-                    date={product?.created_at}
-                    link={product?.alias}
-                    isNegotiate={product?.isNegotiate}
-                    price={product?.price}
-                    name_cate={product?.category?.name}
-                  />
-                );
-              }
-            )}
+      <WapperPagination
+        isFetched={isFetched}
+        pagination={pagination}
+        setPage={setPage}
+      >
+        {ProductData?.data?.data &&
+          ProductData?.data?.data?.map(
+            (product: apiDataProduct, index: number) => {
+              return (
+                <ProductItem
+                  key={index}
+                  desc={product?.short_content}
+                  title={product?.name}
+                  src={product?.list_images?.[0]?.thumb}
+                  date={product?.created_at}
+                  link={product?.alias}
+                  isNegotiate={product?.isNegotiate}
+                  price={product?.price}
+                  name_cate={product?.category?.name}
+                />
+              );
+            }
+          )}
 
-          {isFetched &&(!ProductData?.data?.data ||
+        {isFetched &&
+          (!ProductData?.data?.data ||
             ProductData?.data?.data?.length <= 0) && (
             <div className="col-span-3 max-lg:col-span-2 max-sm:col-span-1 text-center">
               <div className="flex justify-center mb-3">
@@ -84,8 +84,7 @@ const Products = () => {
               </span>
             </div>
           )}
-        </WapperPagination>
-      </Suspense>
+      </WapperPagination>
     </>
   );
 };

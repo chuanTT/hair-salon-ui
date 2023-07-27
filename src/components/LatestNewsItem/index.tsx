@@ -7,17 +7,24 @@ import Shimmer from "../Shimmer";
 import config from "@/config";
 
 interface LatestNewsItemProps extends BlogItemProps {
-    isShimmer?: boolean
+  isShimmer?: boolean;
 }
 
-const LatestNewsItem: FC<LatestNewsItemProps> = ({ date, link, src, title, isShimmer }) => {
+const LatestNewsItem: FC<LatestNewsItemProps> = ({
+  date,
+  link,
+  src,
+  title,
+  isShimmer,
+}) => {
   const LinkBlogLatest = `${config.router.news}/${link}`;
   return (
     <div className="flex gap-2">
-      <div className="overflow-hidden rounded flex-shrink-0">
+      <div className="overflow-hidden rounded flex-shrink-0 w-[100px] h-[71px] relative">
         <Link href={LinkBlogLatest}>
           <Images w={"100px"} h={"71px"} src={src} alt={title} />
         </Link>
+        {!isShimmer && <Shimmer />}
       </div>
       <div className="flex flex-col flex-1">
         <h6 className="text-base pb-1 ellipsis-2 relative min-h-[24px] overflow-hidden">

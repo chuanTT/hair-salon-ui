@@ -1,5 +1,4 @@
 import { use } from "react";
-import { Metadata } from "next";
 import { statusPrice, statusProduct } from "@/common/function";
 import PreviewProducts from "@/components/PreviewProducts";
 import RelatedProduct from "@/components/RelatedProduct";
@@ -26,7 +25,7 @@ const Details = ({ params }: { params: { alias: string } }) => {
           <span className="text-sm text-grayText-300">
             {data?.data?.category?.name}
           </span>
-          <h3 className="text-3xl text-grayText mt-2">{data?.data?.name}</h3>
+          <h1 className="text-3xl text-grayText mt-2">{data?.data?.name}</h1>
           <span className="text-lg block mt-5">
             {statusPrice(data?.data?.isNegotiate ?? 1, data?.data?.price)}
           </span>

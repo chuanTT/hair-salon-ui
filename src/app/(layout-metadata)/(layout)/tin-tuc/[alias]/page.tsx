@@ -1,17 +1,23 @@
 import { use } from "react";
+import { notFound } from "next/navigation";
 import { formatDate } from "@/common/function";
 import Images from "@/components/Images";
 import RelatedBlog from "@/components/RelatedBlog";
 import LatestNews from "@/partials/Blog/LatestNews";
 import { getBlog, tableBlog } from "@/services/blogApi";
 import { apiDataBlog } from "@/types";
-import { notFound } from "next/navigation";
+
+const sleep = async (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
 const Details = ({ params }: { params: { alias: string } }) => {
-  const data: { data?: apiDataBlog } = use(getBlog(`/${tableBlog}/${params?.alias}`));
+  use(sleep(20000));
+  const data: { data?: apiDataBlog } = use(
+    getBlog(`/${tableBlog}/${params?.alias}`)
+  );
 
-  if(!data?.data) {
-    notFound()
+  if (!data?.data) {
+    notFound();
   }
 
   return (
@@ -46,7 +52,7 @@ const Details = ({ params }: { params: { alias: string } }) => {
         </div>
       </div>
 
-      <RelatedBlog alias={params?.alias}/>
+      <RelatedBlog alias={params?.alias} />
     </>
   );
 };

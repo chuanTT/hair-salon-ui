@@ -60,7 +60,7 @@ const ProductItem: FC<ProductItemProps> = ({
       <div className="relative mx-[10px] flex-1 bg-white shadow-blog p-5 overflow-hidden -mt-[30px] flex flex-col">
         <span
           className={`block mb-2 text-sm text-gray-400 ${
-            isShimmer ? "relative min-h-[20px]" : ""
+            isShimmer ? "relative min-h-[20px] overflow-hidden" : ""
           }`}
         >
           {name_cate ?? "Danh mục"}
@@ -69,7 +69,7 @@ const ProductItem: FC<ProductItemProps> = ({
         <Link
           href={linkProduct}
           className={`text-lg text-grayText mb-[15px] font-medium ellipsis-2 ${
-            isShimmer ? "relative min-h-[28px]" : ""
+            isShimmer ? "relative min-h-[28px] overflow-hidden" : ""
           }`}
         >
           {title}
@@ -80,7 +80,7 @@ const ProductItem: FC<ProductItemProps> = ({
             isShimmer ? "min-h-[24px] overflow-hidden" : ""
           }`}
         >
-          <p className="text-base text-grayText-300 ellipsis-2 mt-auto">
+          <p className="text-base text-grayText-300 ellipsis-2 mt-auto relative">
             {desc}
           </p>
 
@@ -89,27 +89,29 @@ const ProductItem: FC<ProductItemProps> = ({
 
         <span
           className={`block mt-2 text-base font-medium text-orange-400 ml-auto ${
-            isShimmer ? "min-h-[24px] overflow-hidden" : ""
+            isShimmer ? "min-h-[24px] overflow-hidden relative" : ""
           }`}
         >
           {statusPrice(isNegotiate, price)}
           {isShimmer && <Shimmer />}
         </span>
 
-        <div
-          className={`pt-4 mt-auto ${
-            isShimmer ? "min-h-[20px] w-fit relative overflow-hidden" : ""
-          }`}
-        >
-          <Link
-            href={linkProduct}
-            className="text-sm uppercase text-grayText-300 font-medium transition-all duration-300 hover:underline hover:text-orange-500"
-            style={{ lineHeight: "20px" }}
+        <div className={`pt-4 mt-auto`}>
+          <div
+            className={`${
+              isShimmer ? "min-h-[20px] w-fit relative overflow-hidden" : ""
+            }`}
           >
-            Xem thêm
-          </Link>
+            <Link
+              href={linkProduct}
+              className="text-sm uppercase text-grayText-300 font-medium transition-all duration-300 hover:underline hover:text-orange-500"
+              style={{ lineHeight: "20px" }}
+            >
+              Xem thêm
+            </Link>
 
-          {isShimmer && <Shimmer />}
+            {isShimmer && <Shimmer />}
+          </div>
         </div>
       </div>
     </div>

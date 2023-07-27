@@ -72,19 +72,21 @@ const BlogItem: FC<BlogItemProps> = ({
           {isShimmer && <Shimmer />}
         </div>
 
-        <div
-          className={`pt-4 mt-auto ${
-            isShimmer ? "min-h-[20px] w-fit relative overflow-hidden" : ""
-          }`}
-        >
-          <Link
-            href={linkBlog}
-            className="text-sm uppercase  text-grayText-300 font-medium transition-all duration-300 hover:underline hover:text-orange-500"
-            style={{ lineHeight: "20px" }}
+        <div className={`pt-4 mt-auto`}>
+          <div
+            className={`${
+              isShimmer ? "min-h-[20px] w-fit relative overflow-hidden" : ""
+            }`}
           >
-            Xem thêm
-          </Link>
-          {isShimmer && <Shimmer />}
+            <Link
+              href={linkBlog}
+              className="text-sm uppercase  text-grayText-300 font-medium transition-all duration-300 hover:underline hover:text-orange-500"
+              style={{ lineHeight: "20px" }}
+            >
+              Xem thêm
+            </Link>
+            {isShimmer && <Shimmer />}
+          </div>
         </div>
       </div>
     </div>
