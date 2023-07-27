@@ -1,6 +1,5 @@
 import moment from "moment";
-import { dataSettingsApi } from "@/layout/ProviderSettings";
-import { typeObject } from "@/types";
+import { dataSettingsApi, typeObject } from "@/types";
 
 const isObject = (obj: any) => {
   let isCheck = false;
