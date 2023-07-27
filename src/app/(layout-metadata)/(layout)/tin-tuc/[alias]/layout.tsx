@@ -1,7 +1,8 @@
 import { joinUrl } from "@/common/function";
 import config from "@/config";
 import { getBlog, tableBlog } from "@/services/blogApi";
-import { apiDataBlog, defaultProps } from "@/types";
+import { FetchSetting } from "@/services/otherApi";
+import { apiDataBlog, dataSettingsApi, defaultProps } from "@/types";
 import { Metadata } from "next";
 import { FC } from "react";
 
@@ -13,9 +14,19 @@ export const generateMetadata = async ({
   const dataBlogDetail: { data?: apiDataBlog } = await getBlog(
     `/${tableBlog}/${params?.alias}`
   );
+  const dataSettings: { data: dataSettingsApi } = await FetchSetting();
+  const resultSettings = dataSettings?.data;
   const result = dataBlogDetail?.data;
-  const title = result?.title;
+  const title = `${result?.title} ${
+    resultSettings?.company?.company_name
+      ? `| ${resultSettings?.company?.company_name}`
+      : ""
+  }`;
   const alias = `${config.router.news}/${result?.alias}`;
+
+  if (!result) {
+    return config.notFound;
+  }
 
   return {
     title,

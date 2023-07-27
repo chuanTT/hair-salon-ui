@@ -5,10 +5,15 @@ import PreviewProducts from "@/components/PreviewProducts";
 import RelatedProduct from "@/components/RelatedProduct";
 import { getProduct, tableProduct } from "@/services/product";
 import { apiDataProduct } from "@/types";
+import { notFound } from "next/navigation";
 
 
 const Details = ({ params }: { params: { alias: string } }) => {
   const data: { data?: apiDataProduct } = use(getProduct(`/${tableProduct}/${params?.alias}`));
+
+  if(!data?.data) {
+    notFound()
+  }
 
   return (
     <>

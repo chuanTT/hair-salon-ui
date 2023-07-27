@@ -1,4 +1,3 @@
-
 import { convertViToEn } from "@/common/function";
 import { typeFilterBlog, typeFilterProduct } from "@/types";
 
@@ -8,6 +7,13 @@ const config = {
     introduce: "/gioi-thieu",
     product: "/san-pham",
     news: "/tin-tuc",
+  },
+  notFound: {
+    title: "Không tìm thấy trang",
+    description: "Oops! 😖 Không tìm thấy URL được yêu cầu trên máy chủ này.",
+    openGraph: {
+      title: "Không tìm thấy trang",
+    },
   },
   filter: {
     product: ({ filter }: { filter: typeFilterProduct }) => {

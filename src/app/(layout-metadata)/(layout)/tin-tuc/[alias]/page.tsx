@@ -1,13 +1,18 @@
+import { use } from "react";
 import { formatDate } from "@/common/function";
 import Images from "@/components/Images";
 import RelatedBlog from "@/components/RelatedBlog";
 import LatestNews from "@/partials/Blog/LatestNews";
 import { getBlog, tableBlog } from "@/services/blogApi";
 import { apiDataBlog } from "@/types";
-import { use } from "react";
+import { notFound } from "next/navigation";
 
 const Details = ({ params }: { params: { alias: string } }) => {
   const data: { data?: apiDataBlog } = use(getBlog(`/${tableBlog}/${params?.alias}`));
+
+  if(!data?.data) {
+    notFound()
+  }
 
   return (
     <>

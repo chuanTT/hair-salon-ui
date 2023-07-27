@@ -114,3 +114,37 @@ export interface optionType {
   value?: number | string
   label?: string | number
 }
+
+
+export interface dataSettingsApi {
+  icon?: string;
+  logo?: {
+    settings?: {
+      ["object-fit"]: string;
+      ["object-position"]: string;
+      [key: string]: string;
+    };
+    src?: string;
+  };
+  company: {
+    company_name?: string;
+    phone?: string;
+    email?: string;
+    fanpage_id?: string;
+    description?: string;
+    address: {
+      text?: string;
+      link?: string;
+    };
+    link_page: {
+      url?: string;
+      is_show_page?: number;
+    };
+  };
+  socials: {
+    id?: number,
+    name?: string
+    url?: string
+    thumb?: string
+  }[]
+}

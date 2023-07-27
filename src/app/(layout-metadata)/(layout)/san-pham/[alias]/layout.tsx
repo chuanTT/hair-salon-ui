@@ -1,7 +1,8 @@
 import { joinUrl } from "@/common/function";
 import config from "@/config";
+import { FetchSetting } from "@/services/otherApi";
 import { getProduct, tableProduct } from "@/services/product";
-import { apiDataProduct, defaultProps } from "@/types";
+import { apiDataProduct, dataSettingsApi, defaultProps } from "@/types";
 import { Metadata } from "next";
 import { FC } from "react";
 
@@ -13,13 +14,23 @@ export const generateMetadata = async ({
   const dataProductDetail: { data?: apiDataProduct } = await getProduct(
     `/${tableProduct}/${params?.alias}`
   );
+  const dataSettings: { data: dataSettingsApi } = await FetchSetting();
+  const resultSettings = dataSettings?.data;
   const result = dataProductDetail?.data;
 
+  if (!result) {
+    return config.notFound;
+  }
+
   return {
-    title: result?.name,
+    title: `${result?.name} ${
+      resultSettings?.company?.company_name
+        ? `| ${resultSettings?.company?.company_name}`
+        : ""
+    }`,
     description: result?.short_content,
     alternates: {
-      canonical: `${config.router.product}/${result?.alias}`
+      canonical: `${config.router.product}/${result?.alias}`,
     },
     openGraph: {
       title: result?.name,
