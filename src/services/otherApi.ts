@@ -4,7 +4,7 @@ const tableOther = "other";
 const tableSettings = "settings";
 
 const getSettings = (url?: string) => {
-  return HTTP.get(`${tableOther}/${url}` ?? url);
+  return HTTP.get(`${tableOther}${url}` ?? url);
 };
 
 const FetchSetting = async (revalidate: number = 60) => {
