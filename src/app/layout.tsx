@@ -8,10 +8,10 @@ import { dataSettingsApi } from "@/types";
 
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const generateMetadata = async (): Promise<Metadata> => {
-  const dataSettings: { data: dataSettingsApi } = await FetchSetting();
+  const dataSettings: { data: dataSettingsApi } = await FetchSetting(600);
   const result = dataSettings?.data;
   const company_name = result?.company?.company_name;
   const BASE_URL = joinUrl();

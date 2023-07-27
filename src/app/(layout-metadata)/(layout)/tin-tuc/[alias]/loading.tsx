@@ -15,9 +15,9 @@ const Loading = () => {
             <Shimmer />
           </span>
 
-          <p className="mt-3 relative overflow-hidden h-[100px]">
+          <div className="relative overflow-hidden h-[100px] mt-3">
             <Shimmer />
-          </p>
+          </div>
 
           <div className="mt-3 h-[500px] relative overflow-hidden">
             <Shimmer />

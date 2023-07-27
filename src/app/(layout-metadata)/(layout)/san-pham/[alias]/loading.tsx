@@ -26,9 +26,9 @@ const Loading = () => {
               Mô tả ngắn
               <Shimmer />
             </h6>
-            <p className="relative overflow-hidden h-[100px] mt-3">
+            <div className="relative overflow-hidden h-[100px] mt-3">
               <Shimmer />
-            </p>
+            </div>
           </div>
         </div>
       </div>
