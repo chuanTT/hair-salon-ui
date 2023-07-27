@@ -7,11 +7,7 @@ import LatestNews from "@/partials/Blog/LatestNews";
 import { getBlog, tableBlog } from "@/services/blogApi";
 import { apiDataBlog } from "@/types";
 
-const sleep = async (ms: number) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
-
 const Details = ({ params }: { params: { alias: string } }) => {
-  use(sleep(20000));
   const data: { data?: apiDataBlog } = use(
     getBlog(`/${tableBlog}/${params?.alias}`)
   );

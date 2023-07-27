@@ -6,7 +6,6 @@ import { getProduct, tableProduct } from "@/services/product";
 import { apiDataProduct } from "@/types";
 import { notFound } from "next/navigation";
 
-
 const Details = ({ params }: { params: { alias: string } }) => {
   const data: { data?: apiDataProduct } = use(getProduct(`/${tableProduct}/${params?.alias}`));
 
