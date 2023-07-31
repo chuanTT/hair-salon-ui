@@ -80,7 +80,7 @@ const Products = () => {
               </div>
 
               <span className="text-base font-medium text-grayText">
-                Không tìm thấy dữ liệu
+                Không tìm thấy dữ liệu...
               </span>
             </div>
           )}
